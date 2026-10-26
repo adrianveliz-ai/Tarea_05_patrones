@@ -1,8 +1,9 @@
-cmake_minimum_required(VERSION 3.20)  # CMake version check
-project(simple_example)               # Create project "simple_example"
-set(CMAKE_CXX_STANDARD 14)            # Enable c++14 standard
+cmake_minimum_required(VERSION 3.20)
+project(simple_example)
+set(CMAKE_CXX_STANDARD 14)
 
 
-
-# Add executable target with source files listed in SOURCE_FILES variable
 add_executable(P1 pregunta_01.cpp)
+add_executable(P2 pregunta_02.cpp)
+add_executable(P3 pregunta_03.cpp)
+add_executable(P4 pregunta_04.cpp)
