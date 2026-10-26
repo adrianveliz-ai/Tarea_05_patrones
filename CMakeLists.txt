@@ -5,4 +5,4 @@ set(CMAKE_CXX_STANDARD 14)            # Enable c++14 standard
 
 
 # Add executable target with source files listed in SOURCE_FILES variable
-add_executable(P1 pregunts_1.cpp)
+add_executable(P1 pregunta_01.cpp)
