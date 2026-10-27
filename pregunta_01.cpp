@@ -29,7 +29,6 @@ private:
         balance_ += amount;
     }
 
-    // Verificar fondos y descontar ocurre bajo el mismo lock (atomico).
     bool debit(double amount) {
         lock_guard<mutex> lock(mutex_);
         if (balance_ < amount) return false;
@@ -95,7 +94,7 @@ public:
 
     bool deposit(Account* account, double amount) {
         if (!account || amount <= 0) return false;
-        lock_guard<mutex> lock(mutex_);   // toda la operacion es atomica
+        lock_guard<mutex> lock(mutex_);
         account->credit(amount);
         history_.emplace_back(++nextId_, Transaction::Type::Deposit,
                               account->getId(), amount, true);
@@ -116,7 +115,7 @@ public:
         return history_.size();
     }
 
-    vector<Transaction> getHistory() const {   // copia: no se expone el estado interno
+    vector<Transaction> getHistory() const {
         lock_guard<mutex> lock(mutex_);
         return history_;
     }
@@ -135,15 +134,13 @@ int main() {
 
     vector<thread> threads;
     for (int i = 0; i < 10; ++i) {
-        threads.emplace_back([&]() {
-            manager.deposit(&account, 100);
-            manager.withdraw(&account, 50);
-        });
+        threads.emplace_back([&]() {manager.deposit(&account, 100);manager.withdraw(&account, 50);});
     }
+
     for (auto& t : threads) t.join();
 
     cout << "Balance final: " << account.getBalance() << endl;
     cout << "Direccion manager: " << &TransactionManager::getInstance() << endl;
-    cout << "Direccion manager (referencia original): " << &manager << endl;
-    cout << "Transacciones registradas: " << manager.transactionCount() << endl;
+
+    return 0;
 }
