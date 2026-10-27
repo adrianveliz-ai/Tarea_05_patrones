@@ -8,34 +8,27 @@ using namespace std;
 class Window {
 public:
     virtual void draw() = 0;
-
     virtual ~Window() = default;
 };
 
 class Button {
 public:
     virtual void draw() = 0;
-
     virtual ~Button() = default;
 };
 
 class Shader {
 public:
     virtual void compile() = 0;
-
     virtual ~Shader() = default;
 };
 
 class RenderFactory {
 public:
     virtual ~RenderFactory() = default;
-
     virtual unique_ptr<Window> createWindow() = 0;
-
     virtual unique_ptr<Shader> createShader() = 0;
-
     virtual unique_ptr<Button> createButton() = 0;
-
     virtual string name() = 0;
 };
 

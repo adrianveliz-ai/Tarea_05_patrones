@@ -96,8 +96,7 @@ public:
         if (!account || amount <= 0) return false;
         lock_guard<mutex> lock(mutex_);
         account->credit(amount);
-        history_.emplace_back(++nextId_, Transaction::Type::Deposit,
-                              account->getId(), amount, true);
+        history_.emplace_back(++nextId_, Transaction::Type::Deposit,account->getId(), amount, true);
         return true;
     }
 
@@ -105,8 +104,7 @@ public:
         if (!account || amount <= 0) return false;
         lock_guard<mutex> lock(mutex_);
         bool ok = account->debit(amount);
-        history_.emplace_back(++nextId_, Transaction::Type::Withdraw,
-                              account->getId(), amount, ok);
+        history_.emplace_back(++nextId_, Transaction::Type::Withdraw,account->getId(), amount, ok);
         return ok;
     }
 
