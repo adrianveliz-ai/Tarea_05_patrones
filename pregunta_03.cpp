@@ -140,8 +140,6 @@ protected:
     string name_;
 };
 
-class Cos;
-
 class Sin : public UnaryFunction {
 public:
     explicit Sin(ExprPtr u) : UnaryFunction(move(u), "sin") {}
@@ -237,7 +235,6 @@ int main() {
     cout << "f'(x) = " << deriv->toString() << endl;
     cout << "f(2) = " << expr->evaluate(2) << endl;
 
-
     auto g = make_shared<Divide>(
         make_shared<Exp>(make_shared<Sin>(make_shared<Power>(x, num(2)))),
         make_shared<Ln>(x));
@@ -255,4 +252,6 @@ int main() {
 
     auto p = make_shared<Power>(x, x);
     cout << "\n(x^x)' = " << p->derivative()->toString() << endl;
+
+    return 0;
 }
